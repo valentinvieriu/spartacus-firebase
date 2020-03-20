@@ -1,0 +1,18 @@
+{
+  "hosting": {
+    "site": "spartacus-ssr-lambda",
+    "public": "dist/mystore/browser",
+    "ignore": [
+      "index.html",
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**/**",
+        "function": "spartacusUniversal"
+      }
+    ]    
+  }
+}
