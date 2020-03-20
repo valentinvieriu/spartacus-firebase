@@ -2,17 +2,40 @@
   "hosting": {
     "site": "spartacus-ssr-lambda",
     "public": "dist/mystore/browser",
-    "ignore": [
-      "index.html",
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["index.html", "firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**/**",
         "function": "spartacusUniversal"
       }
-    ]    
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(css|js|jpg|jpeg|gif|png)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "**/ngsw-worker.js",
+        "headers": [
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
+  "functions": {
+    "source": "src/functions",
+    "ignore": ["cp-server.js", "**/node_modules/**"]
   }
 }
