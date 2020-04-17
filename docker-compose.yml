@@ -1,0 +1,10 @@
+version: '2.4'
+services:
+  spartacus:
+    build: .
+    image: eu.gcr.io/sap-hybris-labs/spartacus-ssr
+    container_name: 'spartacus'
+    restart: 'always'
+    ports:
+      - '8080:8080'
+

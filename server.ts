@@ -12,6 +12,9 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import * as request from 'request';
+
+import { environment } from 'src/environments/environment';
 
 const ngExpressEngine = NgExpressEngineDecorator.get(engine);
 
@@ -43,10 +46,24 @@ export function app() {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, {
-      req,
-      providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }],
-    });
+    // res.setHeader('Cache-Control', 'public, max-age=7200');
+    const userAgent = req.headers['user-agent'];
+    if (
+      userAgent.startsWith('facebookexternalhit/1.1') ||
+      userAgent === 'Facebot' ||
+      userAgent.startsWith('Twitterbot')
+    ) {
+      request
+        .get(
+          `${environment.baseUrl}/headless/?url=${environment.baseUrl}${req.originalUrl}`
+        )
+        .pipe(res);
+    } else {
+      res.render(indexHtml, {
+        req,
+        providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }],
+      });
+    }
   });
 
   return server;

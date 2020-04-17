@@ -13,7 +13,10 @@
     "serve:ssr-firebase": "firebase serve",
     "build:ssr": "ng build --prod && ng run mystore:server:production",
     "build:ssr-firebase": "yarn build:ssr && node ./src/functions/cp-server.js",
-    "prerender": "ng run mystore:prerender"
+    "prerender": "ng run mystore:prerender",
+    "build:react-components": "cd cms-web-components/react && yarn && yarn build",
+    "build:svelte-components": "cd cms-web-components/svelte && npm install && npm run build",
+    "build:vue-components": "cd cms-web-components/vue && yarn && yarn build"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +46,7 @@
     "i18next": "^15.0.6",
     "i18next-xhr-backend": "^2.0.1",
     "ngx-infinite-scroll": "^8.0.0",
+    "request": "^2.88.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -54,9 +58,9 @@
     "@angular/language-service": "~9.0.5",
     "@nguniversal/builders": "^9.0.2",
     "@types/express": "^4.17.0",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -65,6 +69,7 @@
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "prettier": "^2.0.2",
     "protractor": "~5.4.3",
     "ts-loader": "^6.0.4",
     "ts-node": "~8.3.0",

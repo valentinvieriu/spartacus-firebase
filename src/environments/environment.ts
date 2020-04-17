@@ -6,6 +6,9 @@ export const environment = {
   production: false,
   occBaseUrl:
     'https://storefront.c39j2-walkersde1-d4-public.model-t.cc.commerce.ondemand.com',
+  baseUrl: 'https://localhost:4002',
+  twitterId: '@kymaproject',
+  facebookAppId: '537061397248927'
 };
 
 /*
